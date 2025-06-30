@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Italianno&family=Kumbh+Sans:wght@100..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+  <title>Frontend Mentor | E-commerce product page</title>
+  <link rel="stylesheet" href="style.css">
+  
+  <style>
+    :root {
+      --orange: hsl(26, 100%, 55%);
+      --pale-orange: hsl(25, 100%, 94%);
+      --very-dark-blue: hsl(220, 13%, 13%);
+      --dark-grayish-blue: hsl(219, 9%, 45%);
+      --grayish-blue: hsl(220, 14%, 75%);
+      --light-grayish-blue: hsl(223, 64%, 98%);
+      --white: hsl(0, 0%, 100%);
+      --black: hsl(0, 0%, 0%, 0.75);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: "Kumbh Sans", sans-serif;
+    }
+
+    .main {
+      margin: 0 auto;
+      max-width: 1200px;
+      padding: 0 20px;
+    }
+
+    header {
+      height: 100px;
+      border-bottom: 1px solid var(--pale-orange);
+    }
+
+    .logo {
+      font-size: 30px;
+      margin-right: 20px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+      width: 100%;
+      gap: 2rem;
+    }
+
+    .nav-links {
+      display: flex;
+      justify-content: center;
+      color: var(--dark-grayish-blue);
+      gap: 2rem;
+      height: 100%;
+    }
+
+    .nav-links li {
+      text-decoration: none;
+      list-style: none;
+      height: 100%;
+      display: grid;
+      place-content: center;
+      cursor: pointer;
+    }
+
+    li:hover {
+      border-bottom: 2px solid var(--orange);
+    }
+
+    .cart {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+      margin-left: auto;
+    }
+
+    .cart img {
+      height: 3rem;
+      width: 3rem;
+      cursor: pointer;
+    }
+
+    .cart img:last-child:hover {
+      border: 2px solid var(--orange);
+      border-radius: 50%;
+    }
+
+    nav .icon-cart {
+      width: 2rem;
+      height: 2rem;
+    }
+
+    .container {
+      display: flex;
+      gap: 100px;
+      padding: 3rem 1rem;
+    }
+
+    .left {
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .product-main {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .product-main img {
+      max-width: 100%;
+      height: auto;
+      object-fit: cover;
+      display: block;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.4s ease;
+    }
+
+    .product-main img:hover {
+      transform: scale(1.02);
+    }
+
+    .slider-container {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 0.8s ease;
+      height: 100%;
+      width: 100%;
+    }
+
+    .slide {
+      min-width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .slide img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+    .list {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      max-width: 100%;
+      gap: 2rem;
+      transition: all 0.5s linear;
+    }
+
+    .list img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.5s linear;
+    }
+
+    .list img:hover {
+      transform: translateY(-2px);
+    }
+
+    .list img.active {
+      opacity: 0.6;
+      border: 2px solid #ff7d1a;
+    }
+
+    .right {
+      width: 50%;
+      margin-top: 5%;
+    }
+
+    .right h4 {
+      color: #7e7777;
+      margin-bottom: 5%;
+    }
+
+    .right h1 {
+      margin-bottom: 5%;
+      font-size: 50px;
+      font-weight: 800;
+      color: rgba(0, 0, 0, 0.829);
+    }
+
+    .right p {
+      color: #7e7777;
+      line-height: 25px;
+      margin-bottom: 5%;
+      font-size: 20px;
+    }
+
+    .price {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 5%;
+    }
+
+    .price h2 {
+      color: black;
+      font-weight: 600;
+      color: rgba(0, 0, 0, 0.829);
+    }
+
+    .price button {
+      padding: 2px;
+      background-color: black;
+      color: white;
+      border-radius: 5px;
+    }
+
+    .quantity {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: rgb(236, 232, 232);
+      padding: 10px;
+      border-radius: 5px;
+      width: 30%;
+    }
+
+    .add-main {
+      display: flex;
+      gap: 1rem;
+      width: 100%;
+      margin-top: 5%;
+    }
+
+    .add-btn {
+      width: 70%;
+      color: black;
+      gap: 1rem;
+    }
+
+    .add-main button {
+      background: hsl(26, 100%, 55%);
+      transition: opacity 0.2s;
+      padding: 10px;
+      border: none;
+      color: black;
+      border-radius: 5px;
+      width: 70%;
+      gap: 1rem;
+    }
+
+    .add-main button:hover {
+      opacity: 0.5;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 0.3rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background-color: black;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+
+    /* Modal Styles */
+    dialog {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      border: none;
+      background: rgba(0, 0, 0, 0.8);
+      backdrop-filter: blur(2px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    dialog[open] {
+      display: flex;
+    }
+
+    .carousel {
+      position: relative;
+      width: 90%;
+      max-width: 500px;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .close-button {
+      position: absolute;
+      top: -40px;
+      right: 0;
+      background: transparent;
+      color: white;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      z-index: 40;
+    }
+
+    .modal-slide {
+      position: relative;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .modal-slide img {
+      max-width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 10px;
+    }
+
+    .modal-thumbnails {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      max-width: 100%;
+      gap: 1rem;
+      transition: all 0.3s linear;
+    }
+
+    .modal-thumbnails img {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: opacity 0.3s ease, border 0.3s ease;
+    }
+
+    .modal-thumbnail.active {
+      opacity: 0.6;
+      border: 2px solid #ff7d1a;
+    }
+
+    .carousel-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background-color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 18px;
+      color: #333;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      z-index: 30;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: opacity 0.3s ease;
+    }
+
+    .carousel-nav:hover {
+      background-color: #f0f0f0;
+    }
+
+    #modalPrevButton {
+      left: -22px;
+    }
+
+    #modalNextButton {
+      right: -22px;
+    }
+
+    #modalPrevButton.hidden, #modalNextButton.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .left {
+        width: 100%;
+      }
+
+      .list {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+      }
+
+      .right {
+        width: 100%;
+        padding: 1rem 0;
+        justify-content: center;
+      }
+
+      .right h1 {
+        font-size: 20px;
+        font-weight: 300px;
+      }
+
+      .nav-links {
+        display: none;
+        flex-direction: column;
+        gap: 1rem;
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background-color: white;
+        padding: 1rem;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        z-index: 5;
+      }
+
+      .hamburger {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .product-main {
+        width: 100%;
+        height: auto;
+      }
+
+      .list {
+        grid-template-columns: repeat(1fr);
+        gap: 0.5rem;
+      }
+
+      .list img {
+        border-radius: 3px;
+      }
+
+      .right {
+        padding: 0.5rem;
+      }
+
+      .add-main {
+        flex-direction: column;
+      }
+
+      .add-main button {
+        width: 100%;
+      }
+
+      .quantity {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="main">
+  <header>
+    <nav>
+      <button class="hamburger" aria-label="Toggle-menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="logo">sneakers</div>
+      
+      <ul class="nav-links">
+        <li><a>Collections</a></li>
+        <li><a>Men</a></li>
+        <li><a>Women</a></li>
+        <li><a>About</a></li>
+        <li><a>Contact</a></li>
+      </ul>
+      
+      <div class="cart">
+        <svg class="icon-cart" width="22" height="20" xmlns="http://www.w3.org/2000/svg"><path d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z" fill="#69707D" fill-rule="nonzero"/></svg>
+        <div style="width: 3rem; height: 3rem; background: #ff7d1a; border-radius: 50%; cursor: pointer;"></div>
+      </div>
+    </nav>
+  </header>
+
+  <div class="container">
+    <div class="left">
+      <div class="product-main" id="mainImageContainer">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23ff7d1a'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='white' font-size='18'%3EProduct Image 1%3C/text%3E%3C/svg%3E" id="mainImage" class="main-image" alt="product1">
+      </div>
+
+      <div class="list" id="thumbnailsContainer">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='75' viewBox='0 0 100 75'%3E%3Crect width='100' height='75' fill='%23ff7d1a'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='white' font-size='8'%3EThumb 1%3C/text%3E%3C/svg%3E" class="thumbnail active" alt="product1">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='75' viewBox='0 0 100 75'%3E%3Crect width='100' height='75' fill='%23ffa500'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='white' font-size='8'%3EThumb 2%3C/text%3E%3C/svg%3E" class="thumbnail" alt="product2">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='75' viewBox='0 0 100 75'%3E%3Crect width='100' height='75' fill='%23ff6347'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='white' font-size='8'%3EThumb 3%3C/text%3E%3C/svg%3E" class="thumbnail" alt="product3">
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='75' viewBox='0 0 100 75'%3E%3Crect width='100' height='75' fill='%23dc143c'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='white' font-size='8'%3EThumb 4%3C/text%3E%3C/svg%3E" class="thumbnail" alt="product4">
+      </div>
+    </div>
+
+    <div class="right">
+      <h4>Sneaker Company</h4>
+      <h1>Fall Limited Edition Sneakers</h1>
+      <p>These low-profile sneakers are your perfect casual wear companion. Featuring a durable rubber outer sole, they'll withstand everything the weather can offer.</p>
+      
+      <div class="price">
+        <h2>$125.00</h2>
+        <button class="price-btn">50%</button>
+      </div>
+      <h4><strike>$250.00</strike></h4>
+
+      <div class="add-main">
+        <div class="quantity">
+          <button>-</button>
+          <h3>0</h3>
+          <button>+</button>
+        </div>
+        <div class="add-btn">
+          <button>
+            <svg width="22" height="20" xmlns="http://www.w3.org/2000/svg"><path d="M20.925 3.641H3.863L3.61.816A.896.896 0 0 0 2.717 0H.897a.896.896 0 1 0 0 1.792h1l1.031 11.483c.073.828.52 1.726 1.291 2.336C2.83 17.385 4.099 20 6.359 20c1.875 0 3.197-1.87 2.554-3.642h4.905c-.642 1.77.677 3.642 2.555 3.642a2.72 2.72 0 0 0 2.717-2.717 2.72 2.72 0 0 0-2.717-2.717H6.365c-.681 0-1.274-.41-1.53-1.009l14.321-.842a.896.896 0 0 0 .817-.677l1.821-7.283a.897.897 0 0 0-.87-1.114ZM6.358 18.208a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm10.015 0a.926.926 0 0 1 0-1.85.926.926 0 0 1 0 1.85Zm2.021-7.243-13.8.81-.57-6.341h15.753l-1.383 5.53Z" fill="currentColor" fill-rule="nonzero"/></svg>
+            Add to cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<dialog id="productModal">
+  <div class="carousel">
+    <button class="close-button" id="closeModal">×</button>
+    
+    <div class="modal-slide">
+      <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23ff7d1a'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='white' font-size='18'%3EProduct Image 1%3C/text%3E%3C/svg%3E" id="modalImage" alt="product1">
+      <button class="carousel-nav carousel-nav-left" id="modalPrevButton">
+        <svg width="12" height="18" xmlns="http://www.w3.org/2000/svg"><path d="M11 1 3 9l8 8" stroke="#1D2026" stroke-width="3" fill="none" fill-rule="evenodd"/></svg>
+      </button>
+      <button class="carousel-nav carousel-nav-right" id="modalNextButton">
+        <svg width="13" height="18" xmlns="http://www.w3.org/2000/svg"><path d="m2 1 8 8-8 8" stroke="#1D2026" stroke-width="3" fill="none" fill-rule="evenodd"/></svg>
+      </button>
+    </div>
+    
+    <div class="modal-thumbnails" id="modalThumbnailsContainer">
+      <!-- Thumbnails will be dynamically added here -->
+    </div>
+  </div>
+</dialog>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Sample product images data
+  const productImages = [
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23ff7d1a'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='white' font-size='18'%3EProduct Image 1%3C/text%3E%3C/svg%3E",
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23ffa500'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='white' font-size='18'%3EProduct Image 2%3C/text%3E%3C/svg%3E",
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23ff6347'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='white' font-size='18'%3EProduct Image 3%3C/text%3E%3C/svg%3E",
+    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='300' viewBox='0 0 400 300'%3E%3Crect width='400' height='300' fill='%23dc143c'/%3E%3Ctext x='50%25' y='50%25' text-anchor='middle' dy='.3em' fill='white' font-size='18'%3EProduct Image 4%3C/text%3E%3C/svg%3E"
+  ];
+
+  // Elements
+  const hamburger = document.querySelector('.hamburger');
+  const navLinks = document.querySelector('.nav-links');
+  const mainImage = document.getElementById('mainImage');
+  const thumbnails = document.querySelectorAll('.list img');
+  const dialog = document.getElementById('productModal');
+  const closeDialog = document.getElementById('closeModal');
+  const modalImage = document.getElementById('modalImage');
+  const modalPrevButton = document.getElementById('modalPrevButton');
+  const modalNextButton = document.getElementById('modalNextButton');
+  const modalThumbnailsContainer = document.getElementById('modalThumbnailsContainer');
+
+  let currentImageIndex = 0;
+  let isTransitioning = false;
+
+  // Hamburger menu toggle
+  hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    hamburger.classList.toggle('open');
+  });
+
+  // Initialize thumbnails
+  function initializeThumbnails() {
+    thumbnails.forEach((thumbnail, index) => {
+      if (index === 0) {
+        thumbnail.classList.add('active');
+      } else {
+        thumbnail.classList.remove('active');
+      }
+    });
+  }
+
+  // Update main image and thumbnails
+  function updateMainImage(index) {
+    mainImage.src = productImages[index];
+    currentImageIndex = index;
+    
+    // Update thumbnail selection
+    thumbnails.forEach((thumb, idx) => {
+      if (idx === index) {
+        thumb.classList.add('active');
+      } else {
+        thumb.classList.remove('active');
+      }
+    });
+  }
+
+  // Thumbnail click handlers
+  thumbnails.forEach((thumbnail, index) => {
+    thumbnail.addEventListener('click', function() {
+      if (isTransitioning) return;
+      updateMainImage(index);
+    });
+  });
+
+  // Main image click handler - opens modal
+  mainImage.addEventListener('click', function() {
+    openModal(currentImageIndex);
+  });
+
+  // Open modal function
+  function openModal(index) {
+    currentImageIndex = index;
+    modalImage.src = productImages[index];
+    createModalThumbnails();
+    updateModalThumbnails(index);
+    updateNavigationButtons(index);
+    dialog.showModal();
+  }
+
+  // Create modal thumbnails
+  function createModalThumbnails() {
+    modalThumbnailsContainer.innerHTML = '';
+    
+    thumbnails.forEach((thumbnail, index) => {
+      const modalThumb = document.createElement('div');
+      modalThumb.className = 'modal-thumbnail';
+      
+      const img = document.createElement('img');
+      img.src = thumbnail.src;
+      img.alt = thumbnail.alt;
+      
+      modalThumb.appendChild(img);
+      modalThumbnailsContainer.appendChild(modalThumb);
+      
+      // Add click handler
+      modalThumb.addEventListener('click', function() {
+        if (isTransitioning) return;
+        changeModalImage(index);
+      });
+    });
+  }
+
+  // Change modal image
+  function changeModalImage(index) {
+    if (isTransitioning) return;
+    isTransitioning = true;
+    
+    currentImageIndex = index;
+    modalImage.src = productImages[index];
+    updateMainImage(index); // Also update main gallery
+    updateModalThumbnails(index);
+    updateNavigationButtons(index);
+    
+    setTimeout(() => {
+      isTransitioning = false;
+    }, 300);
+  }
+
+  // Update modal thumbnails selection
+  function updateModalThumbnails(index) {
+    const modalThumbs = document.querySelectorAll('.modal-thumbnail');
+    modalThumbs.forEach((thumb, idx) => {
+      if (idx === index) {
+        thumb.classList.add('active');
+      } else {
+        thumb.classList.remove('active');
+      }
+    });
+  }
+
+  // Update navigation buttons
+  function updateNavigationButtons(index) {
+    if (index === 0) {
+      modalPrevButton.classList.add('hidden');
+    } else {
+      modalPrevButton.classList.remove('hidden');
+    }
+    
+    if (index === productImages.length - 1) {
+      modalNextButton.classList.add('hidden');
+    } else {
+      modalNextButton.classList.remove('hidden');
+    }
+  }
+
+  // Modal navigation buttons
+  modalPrevButton.addEventListener('click', () => {
+    if (isTransitioning || currentImageIndex === 0) return;
+    changeModalImage(currentImageIndex - 1);
+  });
+
+  modalNextButton.addEventListener('click', () => {
+    if (isTransitioning || currentImageIndex === productImages.length - 1) return;
+    changeModalImage(currentImageIndex + 1);
+  });
+
+  // Close modal
+  closeDialog.addEventListener('click', () => {
+    dialog.close();
+  });
+
+  // Close modal when clicking outside
+  dialog.addEventListener('click', (e) => {
+    if (e.target === dialog) {
+      dialog.close();
+    }
+  });
+
+  // Keyboard navigation
+  dialog.addEventListener('keydown', (e) => {
+    if (!dialog.open) return;
+    
+    if (e.key === 'ArrowLeft' && currentImageIndex > 0) {
+      e.preventDefault();
+      changeModalImage(currentImageIndex - 1);
+    } else if (e.key === 'ArrowRight' && currentImageIndex < productImages.length - 1) {
+      e.preventDefault();
+      changeModalImage(currentImageIndex + 1);
+    } else if (e.key === 'Escape') {
+      dialog.close();
+    }
+  });
+
+  // Initialize
+  initializeThumbnails();
+});
+</script>
+
+<script src="product.js"></script>
+
+
+</body>
+</html>

@@ -9,13 +9,13 @@ document.addEventListener('DOMContentLoaded', function() {
     hamburger.classList.toggle('open');
   });
   
-  // Gallery/Carousel functionality
+
   const mainImage = document.querySelector('.product-main img');
   const thumbnails = document.querySelectorAll('.list img');
   let currentImageIndex = 0;
   let isTransitioning = false;
   
-  // Create slider container for main gallery
+  
   setupGallerySlider();
   
   function setupGallerySlider() {
@@ -93,18 +93,20 @@ document.addEventListener('DOMContentLoaded', function() {
 
   function setupModalSlider() {
    
-    const modalContainer = document.getElementById('modalImage').parentElement;
+   const modalContainer = document.getElementById('modalImage').parentElement;
     
 
     const modalSliderContainer = document.createElement('div');
-    modalSliderContainer.className = 'modal-slider-container';
-    modalSliderContainer.style.width = '100%';
-    modalSliderContainer.style.height = '100%';
-    modalSliderContainer.style.overflow = 'hidden';
-    modalSliderContainer.style.position = 'relative'; 
+    modalSliderContainer.className = 'modal-slide';
+    // modalSliderContainer.style.width = '100%';
+    // modalSliderContainer.style.height = '100%';
+    //  modalSliderContainer.style.overflow = 'hidden';
+    // modalSliderContainer.style.position = 'relative'; 
 
     const modalSlider = document.createElement('div');
     modalSlider.id = 'modalSlider';
+
+
     
 
     for (let i = 1; i <= thumbnails.length; i++) {
@@ -115,21 +117,20 @@ document.addEventListener('DOMContentLoaded', function() {
       img.src = `./images/image-product-${i}.jpg`;
       img.alt = `Product ${i}`;
       
+
       slide.appendChild(img);
       modalSlider.appendChild(slide);
     }
-    
-    // Make sure navigation buttons are properly positioned inside the slider container
+
     if (modalPrevButton && modalNextButton) {
-      // Remove them from their current location
+  
       modalPrevButton.remove();
       modalNextButton.remove();
       
-      // Add them to the slider container
+ 
       modalSliderContainer.appendChild(modalPrevButton);
       modalSliderContainer.appendChild(modalNextButton);
-      
-      // Make sure they're visible
+ 
       modalPrevButton.style.display = 'flex';
       modalNextButton.style.display = 'flex';
     }
@@ -138,20 +139,20 @@ document.addEventListener('DOMContentLoaded', function() {
     modalContainer.innerHTML = '';
     modalContainer.appendChild(modalSliderContainer);
     
-    // Return the slider for use in update functions
+   
     return modalSlider;
   }
   
-  // Function to update navigation button visibility
+
   function updateNavigationButtons(index) {
-    // Show/hide previous button
+   
     if (index === 0) {
       modalPrevButton.classList.add('hidden');
     } else {
       modalPrevButton.classList.remove('hidden');
     }
     
-    // Show/hide next button
+ 
     if (index === thumbnails.length - 1) {
       modalNextButton.classList.add('hidden');
     } else {
@@ -159,30 +160,27 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }
   
-  // Add click handler to each slide in the main gallery
+ 
   function addSlideClickHandlers() {
     const slides = document.querySelectorAll('.slide');
     slides.forEach(slide => {
       slide.addEventListener('click', function() {
-        // Get the index of the clicked slide
+    
         const clickedIndex = parseInt(slide.dataset.index);
-        
-        // Set current index to the clicked slide
+       
         currentImageIndex = clickedIndex;
         
-        // Setup modal slider and store the returned slider element
+       
         const modalSlider = setupModalSlider();
         
-        // Create modal thumbnails
+      
         createModalThumbnails();
         
-        // Position modal slider to clicked index
-        updateModalSlider(clickedIndex);
         
-        // Update navigation buttons
+        updateModalSlider(clickedIndex);
+   
         updateNavigationButtons(clickedIndex);
         
-        // Ensure the slider is actually using the index we set
         if (modalSlider) {
           modalSlider.style.transform = `translateX(-${clickedIndex * 100}%)`;
         }
@@ -192,15 +190,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // Initialize slide click handlers
   addSlideClickHandlers();
   
-  // Close modal handler
+
   closeDialog.addEventListener('click', () => {
     dialog.close();
   });
-  
-  // Create modal thumbnails
+
   function createModalThumbnails() {
     const modalThumbnailsContainer = document.getElementById('modalThumbnailsContainer');
     modalThumbnailsContainer.innerHTML = '';
@@ -236,14 +232,14 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // Update modal slider
+
   function updateModalSlider(index) {
     const modalSlider = document.getElementById('modalSlider');
     if (modalSlider) {
       modalSlider.style.transform = `translateX(-${index * 100}%)`;
     }
     
-    // Update modal thumbnails
+
     document.querySelectorAll('.modal-thumbnail').forEach((thumb, idx) => {
       if (idx === index) {
         thumb.classList.add('active');
@@ -253,16 +249,16 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }
   
-  // Add carousel navigation functionality
+
   if (modalPrevButton && modalNextButton) {
-    // Previous button handler
+
     modalPrevButton.addEventListener('click', () => {
       if (isTransitioning) return;
       isTransitioning = true;
       
       currentImageIndex--;
       if (currentImageIndex < 0) {
-        currentImageIndex = 0; // Stop at first slide
+        currentImageIndex = 0; 
       }
       
       updateModalSlider(currentImageIndex);
@@ -280,7 +276,7 @@ document.addEventListener('DOMContentLoaded', function() {
       
       currentImageIndex++;
       if (currentImageIndex >= thumbnails.length) {
-        currentImageIndex = thumbnails.length - 1; // Stop at last slide
+        currentImageIndex = thumbnails.length - 1; 
       }
       
       updateModalSlider(currentImageIndex);
