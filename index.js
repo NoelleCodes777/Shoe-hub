@@ -1,13 +1,42 @@
 document.addEventListener('DOMContentLoaded', function() {
   
-  const hamburger = document.querySelector('.hamburger');
-  const navLinks = document.querySelector('.nav-links'); 
-  console.log(navLinks);
+  // const hamburger = document.querySelector('.hamburger');
+  // const navLinks = document.querySelector('.nav-links'); 
+  // console.log(navLinks);
   
+  // hamburger.addEventListener('click', () => {
+  //   navLinks.classList.toggle('active');
+  //   hamburger.classList.toggle('open');
+  // });
+
+const hamburger = document.querySelector('.hamburger');
+const mobileNav = document.getElementById('mobileNav');
+const overlay = document.getElementById('overlay');
+const closeNav = document.getElementById('closeNav');
+
+// Toggle mobile menu
   hamburger.addEventListener('click', () => {
-    navLinks.classList.toggle('active');
-    hamburger.classList.toggle('open');
-  });
+  hamburger.classList.toggle('active');
+  mobileNav.classList.toggle('active');
+  overlay.classList.toggle('active');
+  document.body.style.overflow = mobileNav.classList.contains('active') ? 'hidden' : 'auto';
+});
+
+// Close mobile menu
+closeNav.addEventListener('click', closeMobileMenu);
+overlay.addEventListener('click', closeMobileMenu);
+
+function closeMobileMenu() {
+  hamburger.classList.remove('active');
+  mobileNav.classList.remove('active');
+  overlay.classList.remove('active');
+  document.body.style.overflow = 'auto';
+}
+
+
+
+
+
   
 
   const mainImage = document.querySelector('.product-main img');
@@ -98,10 +127,6 @@ document.addEventListener('DOMContentLoaded', function() {
 
     const modalSliderContainer = document.createElement('div');
     modalSliderContainer.className = 'modal-slide';
-    // modalSliderContainer.style.width = '100%';
-    // modalSliderContainer.style.height = '100%';
-    //  modalSliderContainer.style.overflow = 'hidden';
-    // modalSliderContainer.style.position = 'relative'; 
 
     const modalSlider = document.createElement('div');
     modalSlider.id = 'modalSlider';
@@ -305,11 +330,60 @@ document.addEventListener('DOMContentLoaded', function() {
       }
     });
   }
+
+
+
+// mobile navigation
+
+ 
+  const mainPrevButton = document.getElementById('mainPrevButton');
+  const mainNextButton = document.getElementById('mainNextButton');
+  
+ 
+  if (mainPrevButton && mainNextButton) {
+
+    mainPrevButton.addEventListener('click', () => {
+      if (isTransitioning) return;
+      isTransitioning = true;
+      
+      currentImageIndex--;
+      if (currentImageIndex < 0) {
+        currentImageIndex = 0; 
+      }
+      
+      updateModalSlider(currentImageIndex);
+      updateGallery(currentImageIndex);
+      updateNavigationButtons(currentImageIndex);
+      
+      setTimeout(() => {
+        isTransitioning = false;
+      }, 800);
+    });
+
+    mainNextButton.addEventListener('click', () => {
+      if (isTransitioning) return;
+      isTransitioning = true;
+      
+      currentImageIndex++;
+      if (currentImageIndex >= thumbnails.length) {
+        currentImageIndex = thumbnails.length - 1; 
+      }
+      
+      updateModalSlider(currentImageIndex);
+      updateGallery(currentImageIndex);
+      updateNavigationButtons(currentImageIndex);
+      
+      setTimeout(() => {
+        isTransitioning = false;
+      }, 800);
+    
+  
+
+  
+
+    });
+  }
 });
-
-
-
-
 
 
 

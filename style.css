@@ -31,6 +31,8 @@ header {
   font-size: 30px;
   margin-right: 20px;
 }
+
+
 .nav{
     display: flex;
     justify-content: space-between;
@@ -211,7 +213,7 @@ nav .icon-cart {
   margin-top: 5%;
 }
 .add-btn {
-  width: 70%;
+  width: 100%;
   color: black;
   gap: 1rem;
   
@@ -223,7 +225,7 @@ nav .icon-cart {
   border: none;
   color: black;
   border-radius: 5px;
-  width: 70%;
+  width: 100%;
   gap: 1rem;
 }
 .add-main button:hover {
@@ -272,6 +274,9 @@ opacity: 0.5;
   .add-main {
     flex-direction: column;
   }
+  .add-btn button{
+   width:100%;
+  }
   .add-main button {
     width: 100%;
   }
@@ -279,7 +284,7 @@ opacity: 0.5;
     width: 100%;
   }
 }
-
+/*  
 .hamburger {
   display: none;
   flex-direction: column;
@@ -287,7 +292,6 @@ opacity: 0.5;
   background: none;
   border: none;
   cursor: pointer;
-
   position: relative;
 }
 .hamburger span {
@@ -297,11 +301,126 @@ opacity: 0.5;
   background-color: black;
   border-radius: 5px;
   transition: all 0.3s ease;
-}
+}   */
+
+   
+
+
+.hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 0.3rem;
+      background: none;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      z-index: 1001;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background-color: #333;
+      border-radius: 5px;
+      transition: all 0.3s ease;
+    }
+
+    /* Hamburger Animation */
+    .hamburger.active span:nth-child(1) {
+      transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+      transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    /* Mobile Navigation - Side Panel */
+
+    .mobile-nav {
+      position: fixed;
+      top: 0;
+      left: -100%;
+      width: 50%;
+      height: 100vh;
+      background: white;
+      z-index: 1000;
+      transition: left 0.3s ease;
+      padding: 2rem;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .mobile-nav.active {
+      left: 0;
+    }
+
+    .mobile-nav-content {
+      margin-top: 3rem;
+    }
+
+    .mobile-nav-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #333;
+      z-index: 1001;
+    }
+
+    .mobile-nav-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .mobile-nav-links a {
+      color: #333;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .mobile-nav-links a:hover {
+      color: #ff7d1a;
+    }
+
+    /* Overlay */
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+
+
+/* end of mobile */
+
 
 .nav-links.active {
   display: flex;
-}
+} 
 
 @media (max-width: 768px) {
   .nav-links {
@@ -316,7 +435,7 @@ opacity: 0.5;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     z-index: 5;
   }
-  .hamburger {
+   .hamburger {
     display: flex;
   }
   .nav-links {
@@ -534,8 +653,10 @@ dialog button{
       }
 
       .list {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 1rem;
+        /* grid-template-columns: repeat(2, 1fr);
+        gap: 1rem; */
+        display:none;
+
       }
 
       .right h1 {
@@ -573,14 +694,70 @@ dialog button{
         width: 98%;
       }
 
-      /* Further adjust for very small screens */
-      #modalPrevButton {
-        left: -10px;
-      }
-
-      #modalNextButton {
-        right: -10px;
-      }
+    
+  
     }
 
 
+
+
+
+/* Show modal navigation buttons on main page for mobile */
+@media (max-width: 768px) {
+  .product-main {
+    position: relative;
+  }
+  
+  /* Copy the modal navigation button styles to main page */
+  .product-main .carousel-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 18px;
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    z-index: 30;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.3s ease;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  
+  .product-main .carousel-nav-left {
+    left: 15px;
+  }
+  
+  .product-main .carousel-nav-right {
+    right: 15px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-main .carousel-nav {
+    width: 40px;
+    height: 40px;
+  }
+  
+  .product-main .carousel-nav-left {
+    left: 10px;
+  }
+  
+  .product-main .carousel-nav-right {
+    right: 10px;
+  }
+}
+
+/* Hide these buttons on desktop */
+@media (min-width: 769px) {
+  .product-main .carousel-nav {
+    display: none !important;
+  }
+}

@@ -19,16 +19,15 @@
   
 
    
-    <header>
-    <nav>
+<header>
+
+     <nav>
 
       <button class="hamburger" aria-label="Toggle-menu">
 
-        <span>Collections</span>
-        <span>Men</span>
-        <span>Women</span>
-        <span>About</span>
-        <span>Contact</span>
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
       <div class="logo">
         sneakers
@@ -36,9 +35,6 @@
       
 
     
-     
-
-<!-- hamburger -->
 
       <ul class="nav-links">
         <li><a>Collections</a></li>
@@ -57,16 +53,41 @@
     
 
     </nav>
-  
-  </header>
-  
+    
+
   
 
+  </header>
+  
+  <div class="mobile-nav" id="mobileNav">
+    <div class="mobile-nav-content">
+      <button class="mobile-nav-close" id="closeNav">×</button>
+      <ul class="mobile-nav-links">
+        <li><a href="#">Collections</a></li>
+        <li><a href="#">Men</a></li>
+        <li><a href="#">Women</a></li>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- Overlay -->
+  <div class="overlay" id="overlay"></div>
+
+    
     <div class="container">
 
       <div class="left">
         <div class="product-main" id="mainImageContainer">
           <img src="./images/image-product-1.jpg" id="mainImage" class="main-image" alt="product1">
+
+    <button class="carousel-nav carousel-nav-left" id="mainPrevButton">
+    <img src="./images/icon-previous.svg" alt="Previous">
+  </button>
+  <button class="carousel-nav carousel-nav-right" id="mainNextButton">
+    <img src="./images/icon-next.svg" alt="Next">
+  </button>
         </div>
        
 
@@ -91,7 +112,7 @@
             <h2>$125.00</h2>
             <button class="price-btn">50%</button>
           </div>
-          <h4><strick>$250.00</strick></h4>
+          <h4><strike>$250.00</strike></h4>
 
 
 
@@ -105,7 +126,7 @@
 
 
             <div class="add-btn">
-                  <button>
+                  <button >
                     <i><img src="./images/icon-cart.svg"></i>
                     Add to cart
                   </button>
@@ -148,11 +169,11 @@
 
 
 
-
-
   <script src="./index.js"></script>
   <script src="./cart.js"></script>
   <script src="./data.js"></script>
+
+
 
 
 </body>
